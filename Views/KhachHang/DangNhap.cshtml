@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+@*css--Dangky--DangNhap*@
+<script src="~/Content/NguoiDung/huudat.niceshose.net/100/238/538/themes/567558/assets/script8eff.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/Content/NguoiDung/maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link href="~/Content/NguoiDung/huudat.niceshose.net/100/238/538/themes/567558/assets/bootstrap.min8eff.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/NguoiDung/huudat.niceshose.net/100/238/538/themes/567558/assets/style8eff.css" rel="stylesheet" type="text/css" />
+
+
+
+<hr />
+<h3>@ViewBag.ThongBao</h3>
+<hr />
+<section class="layout-account">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="login" class="userbox">
+                    <h1>Đăng nhập </h1>
+                    @using (Html.BeginForm())
+                    {
+                        <input name='FormType' type='hidden' value='customer_login' />
+                        <input name='utf8' type='hidden' value='true' />
+
+                        <div class="input-group input-account mb15">
+                            <label class="input-group-addon">
+                                <i class="icon-envelope"></i>
+                            </label>
+                            <input required type="email" name="email" placeholder="Email" class="form-control" />
+                        </div>
+                        <div class="input-group input-account mb15">
+                            <label class="input-group-addon">
+                                <i class="icon-shield"></i>
+                            </label>
+                            <input required type="password" name="password" placeholder="Mật khẩu" class="form-control" size="16" />
+                        </div>
+                        <div class="action_bottom mb15">
+                            <input class="btn btn-signin" type="submit" value="Đăng nhập" />
+                        </div>
+                        <div class="req_pass">
+                            <a href="#" onclick="showRecoverPasswordForm();return false;">Quên mật khẩu?</a>
+                            hoặc @Html.ActionLink("Đăng ký", "DangKy", "KhachHang")
+                        </div>
+                        <input name='returnUrl' type='hidden' value='/account' />
+                    }
+                </div>
+                <div id="recover-password" style="display:none;" class="userbox">
+                    <h1>Phục hồi mật khẩu</h1>
+                    <form accept-charset='UTF-8' action='D:\niceshosetc\niceshose-store.net\login.html' id='recover_customer_password' method='post'>
+                        <input name='FormType' type='hidden' value='recover_customer_password' />
+                        <input name='utf8' type='hidden' value='true' />
+
+                        <div class="input-group input-account mb15">
+                            <label class="input-group-addon">
+                                <i class="icon-envelope"></i>
+                            </label>
+                            <input type="email" name="email" id="recover-email" placeholder="Email" class="form-control" size="30" />
+                        </div>
+                        <div class="action_bottom mb15">
+                            <input class="btn" type="submit" value="Gửi" />
+                        </div>
+                        <div class="req_pass">
+                            <a href="#" onclick="hideRecoverPasswordForm();return false;">Hủy</a>
+                        </div>
+                        <input name='returnUrl' type='hidden' value='/account' />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

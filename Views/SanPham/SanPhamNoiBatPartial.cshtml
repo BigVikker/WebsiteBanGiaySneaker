@@ -1,0 +1,19 @@
+﻿@using WebsiteBanGiaySneaker.Models;
+@*Định nghĩa kiểu dữ liệu cho model*@
+@model  List<SANPHAM>
+
+@foreach (var item in Model)
+{
+    <a href="@Url.Action("XemChiTiet","SanPham",new { @masp = item.MaSP,@mansx = item.MaNSX})">
+        <div class="special-sec1">
+            <div class="col-xs-4 img-deals">
+                <img src="@Url.Content("~/HinhAnh/HinhAnhSP/"+item.Anh)" alt="">
+            </div>
+            <div class="col-xs-8 img-deal1">
+                <h3>@item.TenSP</h3>
+                <p>@string.Format("{0:0,0}", @item.DonGia) VNĐ</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </a>
+}

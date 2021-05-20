@@ -1,0 +1,113 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<WebsiteBanGiaySneaker.Models.PHIEUNHAP>
+
+@{
+    ViewBag.Title = "DanhSachPhieuNhap";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<h2>PHIẾU NHẬP</h2>
+<hr />
+@using (Html.BeginForm("DanhSachPhieuNhap", "QlyNhapHang", FormMethod.Get))
+{
+    <div class="col-lg-8">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" value="@ViewBag.TuKhoa" placeholder="Tìm kiếm theo mã đơn hàng" name="timkiem">
+            <span class="input-group-btn">
+                <button class="btn btn-success" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+            <div class="col-lg-4">
+                @Html.ActionLink("Thêm mới", "ThemMoiPN", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+<br />
+<hr />
+@if (TempData["kthanhcong"] != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <strong>@TempData["kthanhcong"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().MaPN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().NgayNhap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TongTien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().NCC.TenNCC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().NHANVIEN.TenNV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TinhTrang)
+            </th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            using (Html.BeginForm("HuyPhieuNhap", "QlyNhapHang", new { @mapn = item.MaPN }))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaPN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayNhap)
+                    </td>
+                    <td>
+                        @string.Format("{0:0,0}", @item.TongTien) VNĐ
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NCC.TenNCC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NHANVIEN.TenNV)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TinhTrang)
+                    </td>
+                    <td>
+                        @if(item.TinhTrang != "Đã hủy")
+                        {
+                         @Html.ActionLink(" ", "ChiTietPN", new { @mapn = item.MaPN }, new { @class = "fa fa-eye btn btn-primary btn-sm", @title = "Xem chi tiết" })
+                        <button class="btn btn-danger btn-sm fa fa-trash-o" title="Hủy đơn hàng" value=" " type="submit" />
+                        }
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+
+
+</table>
+@*Tạo link liên kết các trang*@
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("DanhSachPhieuNhap", new { @timkiem = @ViewBag.TuKhoa, page = page }))
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+    </script>

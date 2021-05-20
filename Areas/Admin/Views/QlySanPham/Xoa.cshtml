@@ -1,0 +1,105 @@
+﻿@model WebsiteBanGiaySneaker.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<h2>XÓA</h2>
+
+<h3>Bạn có thực sự muốn xóa đôi giày này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NSX.TenNSX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NSX.TenNSX)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongTong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongTong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anh2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anh2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anh3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anh3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Trở về", "QuanLySanPham",null,new { @class="btn btn-danger"  })
+        </div>
+    }
+</div>
