@@ -1,0 +1,135 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<WebsiteBanGiaySneaker.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "Quản lý sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<h2>SẢN PHẨM</h2>
+<br />
+@using (Html.BeginForm("QuanLySanPham", "QlySanPham", FormMethod.Get))
+{
+    <div class="col-lg-8">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" value="@ViewBag.TuKhoa" placeholder="Tìm kiếm theo tên" name="timkiem">
+            <span class="input-group-btn">
+                <button class="btn btn-success" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+            <div class="col-lg-4">
+                @Html.ActionLink("Thêm mới", "ThemMoi", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+<br />
+<hr />
+@if (TempData["tb"] != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <strong>@TempData["tb"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().MaSP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TenSP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Anh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().MaNSX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().SoLuongTong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DonGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Anh2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Anh3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().MoTa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSP)
+                </td>
+                <td>
+                    <img width="50" height="50" src="@Url.Content("~/HinhAnh/HinhAnhSP/" + item.Anh)" alt="">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NSX.TenNSX)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuongTong)
+                </td>
+                <td>
+                    <span>@item.DonGia VNĐ</span>
+                </td>
+                <td>
+                    <img width="50" height="50" src="@Url.Content("~/HinhAnh/HinhAnhSP/" + item.Anh2)" alt="">
+                </td>
+                <td>
+                    <img width="50" height="50" src="@Url.Content("~/HinhAnh/HinhAnhSP/" + item.Anh3)" alt="">
+                </td>
+                <td>
+                    @*Nếu tên sách dài quá 100 kí tự sẽ cắt tên sách ra lấy từ 0 đến kí tự 99*@
+                    @if (item.MoTa.Length < 100)
+                    {
+                        @Html.DisplayFor(modelItem => item.MoTa)
+                    }
+                    else
+                    {
+
+                        <span>@item.MoTa.Substring(0, 19)...</span>
+
+                    }
+                    @*@Html.DisplayFor(modelItem => item.MoTa)*@
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "ChinhSua", new { @masp = item.MaSP }) |
+                    @Html.ActionLink("Chi tiết", "HienThi", new { @masp = item.MaSP }) |
+                    @Html.ActionLink("Xóa", "Xoa", new { @masp = item.MaSP })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*Tạo link liên kết các trang*@
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("QuanLySanPham", new { @timkiem = @ViewBag.TuKhoa, page = page }))
+</div>
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
+

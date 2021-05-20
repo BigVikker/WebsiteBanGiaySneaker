@@ -1,0 +1,73 @@
+﻿@using WebsiteBanGiaySneaker.Models;
+@model List<SANPHAM>
+@{
+
+    ViewBag.Title = "GiayTheoThuongHieu";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+@section MenuLeft{@Html.Partial("~/Views/CuaHang/MenuLeftPartial.cshtml")}
+<div class="wrapper_top_shop">
+    <div class="new_arrivals">
+        <h3 style="text-align:center">@ViewBag.SP</h3>
+        <h3>@ViewBag.ThuongHieu</h3>
+        <hr />
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 product-men women_two">
+                <div class="product-shoe-info shoe">
+                    <div class="men-pro-item">
+                        <div class="men-thumb-item">
+                            <img width="200" height="200" src="@Url.Content("~/HinhAnh/HinhAnhSP/" + item.Anh)" alt="">
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <a href="@Url.Action("XemChiTiet", "SanPham", new { @masp = item.MaSP })" class="link-product-add-cart">Quick View</a>
+                                </div>
+                            </div>
+                            @*<span class="product-new-top">New</span>*@
+                        </div>
+                        <div class="item-info-product">
+                            @*Nếu tên sách dài quá 19 kí tự sẽ cắt tên sách ra lấy từ 0 đến kí tự 18*@
+                            @if (item.TenSP.Length < 19)
+                            {
+                                <h4>
+                                    <a href="single.html">@item.TenSP</a>
+                                </h4>
+                            }
+                            else
+                            {
+                                <h4>
+                                    <a title="@item.TenSP" href="single.html">@item.TenSP.Substring(0, 19)...</a>
+                                </h4>
+                            }
+                            <div class="info-product-price">
+                                <div class="grid_meta">
+                                    <div class="product_price">
+                                        <div class="grid-price ">
+                                            <span class="money ">@item.DonGia VNĐ</span>
+                                        </div>
+                                    </div>
+                                    @*<ul class="stars">
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                        </ul>*@
+                                </div>
+                                @*<div class="shoe single-item hvr-outline-out">
+                                    @using (Html.BeginForm("ThemGioHang", "GioHang", new { @masp = item.MaSP, @URL = Request.Url.ToString() }))
+                                    {
+                                        <button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+                                    }
+                                </div>*@
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="clearfix"></div>
+    </div>
+</div>
+

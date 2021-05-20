@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Cửa Hàng";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+@section MenuLeft{@Html.Partial("~/Views/CuaHang/MenuLeftPartial.cshtml")}
+<div class="left-ads-display col-md-9">
+    <div class="wrapper_top_shop">
+        <div class="col-md-6 shop_left">
+            <img src="~/Content/NguoiDung/images/banner3.jpg" alt="">
+            <h6>Giảm 40%</h6>
+        </div>
+        <div class="col-md-6 shop_right">
+            <img src="~/Content/NguoiDung/images/banner2.jpg" alt="">
+            <h6>Giảm 50%</h6>
+        </div>
+        <div class="clearfix"></div>
+        <!-- product-sec1 -->
+
+        @Html.Action("DanhSachSanPhamPartial", "SanPham")
+        <div class="clearfix"></div>
+        <!-- //product-sec1 -->
+        <div class="col-md-6 shop_left shp">
+            <img src="~/Content/NguoiDung/images/banner4.jpg" alt="">
+            <h6>Giảm 21%</h6>
+        </div>
+        <div class="col-md-6 shop_right shp">
+            <img src="~/Content/NguoiDung/images/banner1.jpg" alt="">
+            <h6>Giảm 31%</h6>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="clearfix"></div>
+        </div>
+    </div>

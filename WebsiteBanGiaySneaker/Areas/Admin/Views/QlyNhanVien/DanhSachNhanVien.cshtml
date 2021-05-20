@@ -1,0 +1,129 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<WebsiteBanGiaySneaker.Models.NHANVIEN>
+
+@{
+    string quyen = (string)Session["Quyen"];
+    if (quyen == "0")
+    {
+        Response.Redirect("/Admin/Login/kCoQuyen");
+    }
+    ViewBag.Title = "DanhSachNhanVien";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>NHÂN VIÊN</h2>
+
+<br />
+@using (Html.BeginForm("DanhSachNhanVien", "QlyNhanVien", FormMethod.Get))
+{
+    <div class="col-lg-8">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" value="@ViewBag.TuKhoa" placeholder="Tìm kiếm theo tên" name="timkiem">
+            <span class="input-group-btn">
+                <button class="btn btn-success" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+            <div class="col-lg-4">
+                @Html.ActionLink("Thêm mới", "ThemMoiNV", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+<br />
+<hr />
+@if (TempData["thongbao"] != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <strong>@TempData["thongbao"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().MaNV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TenNV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Sdt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().GioiTinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().NgaySinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().CMND)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().QuyenNV)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sdt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CMND)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuyenNV)
+                </td>
+                <td>
+                    @Html.ActionLink("Chỉnh sửa", "ChinhSuaNV", new { @manv = item.MaNV }) <br />
+                    @Html.ActionLink("Chi tiết", "HienThiNV", new { @manv = item.MaNV }) <br />
+                    @Html.ActionLink("Xóa", "XoaNV", new { @manv = item.MaNV })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*Tạo link liên kết các trang*@
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+        <div>
+            @Html.PagedListPager(Model, page => Url.Action("DanhSachNhanVien", new { @timkiem = @ViewBag.TuKhoa, page = page }))
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').DataTable({
+                    responsive: true
+                });
+            });
+        </script>

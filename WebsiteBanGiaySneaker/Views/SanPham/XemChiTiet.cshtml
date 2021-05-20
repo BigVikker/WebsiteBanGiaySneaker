@@ -1,0 +1,208 @@
+﻿@using WebsiteBanGiaySneaker.Models;
+@model SANPHAM
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+
+<!-- top Products -->
+<div class="ads-grid_shop">
+    <div class="shop_inner_inf">
+        @if (TempData["kthanhcong"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <strong>@TempData["kthanhcong"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @if (TempData["thanhcong"] != null)
+        {
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <strong>@TempData["thanhcong"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @if (TempData["loisl"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <strong>@TempData["loisl"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        <div class="col-md-4 single-right-left ">
+
+            <div class="grid images_3_of_2">
+                <div class="flexslider">
+
+                    <ul class="slides">
+                        <li data-thumb="@Url.Content("~/HinhAnh/HinhAnhSP/"+Model.Anh)">
+                            <div class="thumb-image"> <img src="@Url.Content("~/HinhAnh/HinhAnhSP/"+Model.Anh)" data-imagezoom="true" class="img-responsive"> </div>
+                        </li>
+                        <li data-thumb="@Url.Content("~/HinhAnh/HinhAnhSP/"+Model.Anh2)">
+                            <div class="thumb-image"> <img src="@Url.Content("~/HinhAnh/HinhAnhSP/"+Model.Anh2)" data-imagezoom="true" class="img-responsive"> </div>
+                        </li>
+                        <li data-thumb="@Url.Content("~/HinhAnh/HinhAnhSP/"+Model.Anh3)">
+                            <div class="thumb-image"> <img src="@Url.Content("~/HinhAnh/HinhAnhSP/"+Model.Anh3)" data-imagezoom="true" class="img-responsive"> </div>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @masp = Model.MaSP, @URL = Request.Url.ToString() }))
+        {
+
+            <div class="col-md-8 single-right-left simpleCart_shelfItem">
+                <h3>@Model.TenSP</h3>
+                <p>
+                    <span class="item_price">Giá: @string.Format("{0:0,0}", Model.DonGia) VNĐ</span>
+                    @*<del>$1,199</del>*@
+                </p>
+
+                <p>
+                    <span class="item_price">Mã sản phẩm: @Model.MaSP</span>
+                </p>
+
+                <p>
+                    <span class="item_price">Nhà sản xuất: @ViewBag.TenNSX</span>
+                </p>
+
+                <div class="color-quality">
+                    <div class="color-quality-right">
+                        <h5>Màu sắc:</h5>
+                        @*@Html.DropDownList("MauSac", (IEnumerable<SelectListItem>)ViewBag.MauSac, new { @class = "form-control" })*@
+                        @Html.DropDownList("MauSac")
+                    </div>
+                </div>
+                <br />
+                <div class="color-quality">
+                    <div class="color-quality-right">
+                        <h5>Size:</h5>
+                        @*@Html.DropDownList("Size", (IEnumerable<SelectListItem>)ViewBag.Size, new { @class = "form-control" })*@
+                        @Html.DropDownList("Size")
+                    </div>
+                </div>
+                <br />
+
+                <div class="occasion-cart">
+                    <div class="shoe single-item single_page_b">
+                        <input type="submit" name="submit" onclick="Validate()" value=" Thêm vào giỏ hàng" class="button add">
+                    </div>
+                </div>
+
+            </div>
+        }
+        <div class="clearfix"> </div>
+        <!-- /new_arrivals -->
+
+        <div class="responsive_tabs">
+            <div id="horizontalTab">
+                <ul class="resp-tabs-list">
+                    <li>Mô tả</li>
+                    @*<li>Reviews</li>
+                        <li>Information</li>*@
+                </ul>
+                <div class="resp-tabs-container">
+                    <!--/tab_one-->
+                    <div class="tab1">
+
+                        <div class="single_page">
+                            @*<h6>Lorem ipsum dolor sit amet</h6>*@
+                            <p>
+                                @Model.MoTa
+                            </p>
+
+                        </div>
+                    </div>
+                    <!--//tab_one-->
+
+                </div>
+            </div>
+        </div>
+        <!--//tabs-->
+        <!-- /new_arrivals -->
+
+
+        <div class="new_arrivals">
+            <h3>Sản phẩm liên quan</h3>
+
+            @foreach (var item in ViewBag.SPLienQuan)
+            {
+                <!-- /womens -->
+                <div class="col-md-3 product-men women_two">
+                    <div class="product-shoe-info shoe">
+                        <div class="men-pro-item">
+                            <div class="men-thumb-item">
+                                <img width="200" height="200" src="@Url.Content("~/HinhAnh/HinhAnhSP/" + item.Anh)" alt="">
+                                <div class="men-cart-pro">
+                                    <div class="inner-men-cart-pro">
+                                        <a href="@Url.Action("XemChiTiet", "SanPham", new { @masp = item.MaSP, @mansx = item.MaNSX })" class="link-product-add-cart">Xem nhanh</a>
+                                    </div>
+                                </div>
+                                @*<span class="product-new-top">New</span>*@
+                            </div>
+                            <div class="item-info-product">
+                                @*Nếu tên sách dài quá 19 kí tự sẽ cắt tên sách ra lấy từ 0 đến kí tự 18*@
+                                @if (item.TenSP.Length < 19)
+                                {
+                                    <h4>
+                                        <a href="@Url.Action("XemChiTiet", "SanPham", new { @masp = item.MaSP, @mansx = item.MaNSX })">@item.TenSP</a>
+                                    </h4>
+                                }
+                                else
+                                {
+                                    <h4>
+                                        <a title="@item.TenSP" href="@Url.Action("XemChiTiet", "SanPham", new { @masp = item.MaSP, @mansx = item.MaNSX })">@item.TenSP.Substring(0, 19)...</a>
+                                    </h4>
+                                }
+                                <div class="info-product-price">
+                                    <div class="grid_meta">
+                                        <div class="product_price">
+                                            <div class="grid-price ">
+                                                <span class="money ">@string.Format("{0:0,0}", item.DonGia) VNĐ</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="shoe single-item hvr-outline-out">
+                                            <button type="submit" class="shoe-cart pshoe-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+                                        </div>*@
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- //womens -->
+            }
+            <div class="clearfix"></div>
+        </div>
+        <!--//new_arrivals-->
+
+
+    </div>
+</div>
+<!-- //top products -->
+<script type="text/javascript">
+    function Validate() {
+        var e = document.getElementById("MauSac");
+        var f = document.getElementById("Size");
+        var strS = f.options[f.selectedIndex].value;
+        var strM = e.options[e.selectedIndex].value;
+
+        if (strM == null || strM == "") {
+            alert("Vui lòng chọn màu sắc");
+        }
+        if (strS == null || strS == "") {
+            alert("Vui lòng chọn size");
+        }
+    }
+</script>

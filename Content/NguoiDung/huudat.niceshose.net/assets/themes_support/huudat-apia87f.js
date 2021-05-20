@@ -1,1 +1,0 @@
-﻿window.Huudat || (window.Huudat = {});

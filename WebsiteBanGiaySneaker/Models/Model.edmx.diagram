@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0097bbd01c4e41b2b7087e012ae6a4f8" Name="Diagram1">
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.CHITIETHD" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.CHITIETPN" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.CHITIETSP" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.DONHANG" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.KHACHHANG" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.MauSac" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.NCC" Width="1.5" PointX="3.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.NSX" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.PHIEUNHAP" Width="1.5" PointX="6" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.SANPHAM" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.Size" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteBanGiaySneakerModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__CHITIETHD__MaDH__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__CHITIETHD__MaSP__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__CHITIETPN__MaPN__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__CHITIETPN__MaSP__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__CHITIETSP__MaMau__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__CHITIETSP__MaSiz__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__CHITIETSP__MaSP__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__DONHANG__MaKH__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__DONHANG__MaNV__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__PHIEUNHAP__MaNCC__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__PHIEUNHAP__MaNV__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK__SANPHAM__MaNSX__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK_CHITIETHD_MauSac" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK_CHITIETHD_Size" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK_CHITIETPN_MauSac" />
+        <AssociationConnector Association="WebsiteBanGiaySneakerModel.FK_CHITIETPN_Size" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

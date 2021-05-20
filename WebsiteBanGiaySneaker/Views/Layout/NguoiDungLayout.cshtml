@@ -1,0 +1,241 @@
+﻿
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>Yugo Shoes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Yugo Shoes Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //custom-theme -->
+    <link href="~/Content/NguoiDung/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/Content/NguoiDung/css/shop.css" type="text/css" media="screen" property="" />
+    <link href="~/Content/NguoiDung/css/style7.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Owl-carousel-CSS -->
+    <link rel="stylesheet" type="text/css" href="~/Content/NguoiDung/css/jquery-ui1.css">
+    <link href="~/Content/NguoiDung/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome-icons -->
+    <link href="~/Content/NguoiDung/css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome-icons -->
+    <link href="//fonts.googleapis.com/css?family=Montserrat:100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+          rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    @*-----------------*@
+    <link rel="stylesheet" href="~/Content/NguoiDung/css/flexslider.css" type="text/css" media="screen" />
+    <link href="~/Content/NguoiDung/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+    @*-------css gio hang----------*@
+    <link rel="stylesheet" type="text/css" href="~/Content/NguoiDung/css/checkout.css">
+    @*-----------css trang giới thiệu-------------*@
+    <link rel="stylesheet" href="~/Content/NguoiDung/css/about.css" type="text/css" media="screen" property="" />
+    @*--chèn-awesome-icons-----*@
+    <link href="~/Content/NguoiDung/css/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- banner -->
+    <div class="banner_top innerpage" id="home">
+        @*<div class="wrapper_top_w3layouts">*@
+        @Html.Partial("~/Views/Home/MenuPartial.cshtml")
+        @*</div>*@
+        <!-- //cart details -->
+        <!-- search -->
+        @*<div class="search_w3ls_agileinfo">
+                <div class="cd-main-header">
+                    <ul class="cd-header-buttons">
+                        <li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
+                    </ul>
+                </div>
+                <div id="cd-search" class="cd-search">
+                    <form action="#" method="post">
+                        <input name="Search" type="search" placeholder="Click enter after typing...">
+                    </form>
+                </div>
+            </div>*@
+        <!-- //search -->
+        <div class="clearfix"></div>
+        <!-- /banner_inner -->
+        <div class="services-breadcrumb_w3ls_agileinfo">
+            <div class="inner_breadcrumb_agileits_w3">
+
+                <ul class="short">
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")<i>|</i></li>
+                    <li>@Html.ActionLink("Cửa hàng", "Index", "CuaHang")</li>
+                </ul>
+            </div>
+        </div>
+        <!-- //banner_inner -->
+    </div>
+
+    <!-- //banner -->
+    <!-- top Products -->
+    @RenderSection("MenuLeft", false)
+    @*@Html.Partial("~/Views/CuaHang/MenuLeftPartial.cshtml")*@
+    @RenderBody()
+    <!--/Quảng Cáo-->
+    @Html.Partial("~/Views/QuangCao/QuangCaoPartial.cshtml")
+    <!--//Quảng Cáo-->
+    <!-- footer -->
+    @Html.Action("FooterPartial", "CuaHang")
+    </div>
+    <!-- //footer -->
+    <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    <!-- js -->
+    <script type="text/javascript" src="~/Content/NguoiDung/js/jquery-2.1.4.min.js"></script>
+    <!-- //js -->
+    @*<!-- cart-js -->
+        <script src="~/Content/NguoiDung/js/minicart.js"></script>
+        <script>
+            shoe.render();
+
+            shoe.cart.on('shoe_checkout', function (evt) {
+                var items, len, i;
+
+                if (this.subtotal() > 0) {
+                    items = this.items();
+
+                    for (i = 0, len = items.length; i < len; i++) { }
+                }
+            });
+        </script>
+        <!-- //cart-js -->*@
+    <!-- /nav -->
+    <script src="~/Content/NguoiDung/js/modernizr-2.6.2.min.js"></script>
+    <script src="~/Content/NguoiDung/js/classie.js"></script>
+    <script src="~/Content/NguoiDung/js/demo1.js"></script>
+    <!-- //nav -->
+    <!--search-bar-->
+    <script src="~/Content/NguoiDung/js/search.js"></script>
+    <!--//search-bar-->
+    <!-- price range (top products) -->
+    <script src="~/Content/NguoiDung/js/jquery-ui.js"></script>
+    <script>
+        //<![CDATA[
+        $(window).load(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 9000,
+                values: [50, 6000],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+        }); //]]>
+    </script>
+    <!-- //price range (top products) -->
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/Content/NguoiDung/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Content/NguoiDung/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smoth-scrolling -->
+    <script type="text/javascript" src="~/Content/NguoiDung/js/bootstrap-3.1.1.min.js"></script>
+
+    @*------------------------------------*@
+
+    <!-- single -->
+    <script src="~/Content/NguoiDung/js/imagezoom.js"></script>
+    <!-- single -->
+    <!-- script for responsive tabs -->
+    <script src="~/Content/NguoiDung/js/easy-responsive-tabs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true, // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+    <!-- FlexSlider -->
+    <script src="~/Content/NguoiDung/js/jquery.flexslider.js"></script>
+    <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+    <!-- //FlexSlider-->
+    @*------------------*@
+    <!--quantity-->
+    <script>
+        $('.value-plus').on('click', function () {
+            var divUpd = $(this).parent().find('.value'),
+                newVal = parseInt(divUpd.text(), 10) + 1;
+            divUpd.text(newVal);
+        });
+
+        $('.value-minus').on('click', function () {
+            var divUpd = $(this).parent().find('.value'),
+                newVal = parseInt(divUpd.text(), 10) - 1;
+            if (newVal >= 1) divUpd.text(newVal);
+        });
+    </script>
+    <!--quantity-->
+    <script>
+        $(document).ready(function (c) {
+            $('.close1').on('click', function (c) {
+                $('.rem1').fadeOut('slow', function (c) {
+                    $('.rem1').remove();
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function (c) {
+            $('.close2').on('click', function (c) {
+                $('.rem2').fadeOut('slow', function (c) {
+                    $('.rem2').remove();
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function (c) {
+            $('.close3').on('click', function (c) {
+                $('.rem3').fadeOut('slow', function (c) {
+                    $('.rem3').remove();
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

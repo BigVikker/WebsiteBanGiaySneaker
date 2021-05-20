@@ -1,0 +1,73 @@
+﻿@model WebsiteBanGiaySneaker.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Thông tin chi tiết";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<h2>HIỂN THỊ</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <label class="col-md-2">  @Html.DisplayNameFor(model => model.MaSP)</label>
+            <div class="col-md-10"> @Html.DisplayFor(model => model.MaSP)</div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div>
+            <label class="col-md-2">  @Html.DisplayNameFor(model => model.TenSP)</label>
+            <div class="col-md-10"> @Html.DisplayFor(model => model.TenSP)</div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div>
+            <label class="col-md-2">  @Html.DisplayNameFor(model => model.NSX.TenNSX)</label>
+            <div class="col-md-10"> @Html.DisplayFor(model => model.NSX.TenNSX)</div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div>
+            <label class="col-md-2">  @Html.DisplayNameFor(model => model.SoLuongTong)</label>
+            <div class="col-md-10"> @Html.DisplayFor(model => model.SoLuongTong)</div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div>
+            <label class="col-md-2">  @Html.DisplayNameFor(model => model.DonGia)</label>
+            <div class="col-md-10"> @string.Format("{0:0,0}", Model.DonGia) VNĐ</div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="col-md-12">@Html.DisplayNameFor(model => model.Anh)</div>
+        <img width="200" height="200" src="@Url.Content("~/HinhAnh/HinhAnhSP/" + Model.Anh)" alt="">
+    </div>
+    <div class="col-md-4">
+        <div class="col-md-12">@Html.DisplayNameFor(model => model.Anh2)</div>
+        <img width="200" height="200" src="@Url.Content("~/HinhAnh/HinhAnhSP/" + Model.Anh2)" alt="">
+    </div>
+    <div class="col-md-4">
+        <div class="col-md-12">@Html.DisplayNameFor(model => model.Anh3)</div>
+        <img width="200" height="200" src="@Url.Content("~/HinhAnh/HinhAnhSP/" + Model.Anh3)" alt="">
+    </div>
+    <br />
+    <div class="col-md-12">
+        <div>
+            <label class="col-md-2"> @Html.DisplayNameFor(model => model.MoTa)</label>
+            <div class="col-md-10">@Html.Raw(Model.MoTa)</div>
+        </div>
+
+    </div>
+    <div class="col-md-12">
+        <div>
+            <label class="col-md-2">  @Html.DisplayNameFor(model => model.NgayCapNhat)</label>
+            <div class="col-md-10"> @Html.DisplayFor(model => model.NgayCapNhat)</div>
+        </div>
+    </div>
+</div>
+<div class="col-md-offset-4">
+    @Html.ActionLink("Sửa", "ChinhSua", new { @masp = Model.MaSP }, new { @class = "btn btn-danger" }) |
+    @Html.ActionLink("Chi tiết sản phẩm", "ChiTiet", new { @masp = Model.MaSP }, new { @class = "btn btn-success" }) |
+    @Html.ActionLink("Trở về", "QuanLySanPham", null, new { @class = "btn btn-danger" })
+</div>

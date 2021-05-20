@@ -1,0 +1,186 @@
+﻿@using WebsiteBanGiaySneaker.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Yugo Shoes Admin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/Admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="~/Content/Admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Content/Admin/dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="~/Content/Admin/vendor/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/Content/Admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- DataTables CSS -->
+    <link href="~/Content/Admin/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="~/Content/Admin/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <!--icon-->
+    @*<link href="~/Content/NguoiDung/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome.min.css" rel="stylesheet" />*@
+    <script src="~/Content/NguoiDung/fontawesome-free-5.0.13/svg-with-js/js/fontawesome.min.js"></script>
+    <link href="~/Content/NguoiDung/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+        <![endif]-->
+    <!--Chèn thư viện ckfider-->
+    <script src="~/Content/Admin/js/ckfinder/ckfinder.js"></script>
+    <script src="~/Content/Admin/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
+
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "ThongKe")">Yugo Shoes Admin</a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-user fa-fw"></i>
+                                @if (Session["User"] != null)
+                                {
+                                    <span>@Session["User"].ToString()</span>
+                                }
+                            </a>
+                        </li>
+                        @*<li>
+                                <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>*@
+                        <li class="divider"></li>
+                        <li>
+                            <a href="@Url.Action("Logout", "Login")"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="@Url.Action("Index","ThongKe")"><i class="fa fa-dashboard"></i> Thống kê</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-file-text"></i> Quản lý sản phẩm<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("QuanLySanPham", "QlySanPham")"><i class="fa fa-list-alt"></i> Sản phẩm</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("DanhSachMauSac", "QlyMauSac")"><i class="fa fa-adjust"></i> Màu sắc</a>
+                                </li>
+                                @*<li>
+                                    <a href="#"><i class="fa fa-arrows-alt "></i> Kích thước</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-flag-checkered"></i> Thương hiệu</a>
+                                </li>*@
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-user"></i> Người dùng<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("DanhSachNhanVien","QlyNhanVien")"><i class="fa fa-male"></i> Danh sách nhân viên</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("DanhSachKhachHang","QlyKhachHang")"><i class="fa fa-users"></i> Danh sách khách hàng</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-list"></i> Đơn hàng<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#"><i class="fa fa-sign-out"></i> Xuất hàng<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="@Url.Action("DanhSachDonHang","QlyDonHang")"><i class="fa fa-th-list"></i> Danh sách đơn hàng</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("DanhSachChuaDuyet","QlyDonHang")"><i class="fa fa-magic"></i> Chờ duyệt</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("DonHangChoGiao","QlyDonHang")"><i class="fa fa-truck"></i> Chờ giao</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-sign-in"></i> Nhập hàng<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="@Url.Action("DanhSachPhieuNhap","QlyNhapHang")"><i class="fa fa-th-list"></i> Danh sách phiếu nhập</a>
+                                        </li>
+                                        @*<li>
+                            <a href="@Url.Action("DanhSachChuaDuyet","QlyDonHang")"><i class="fas fa-users"></i> Chờ duyệt</a>
+                        </li>*@
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            @RenderBody()
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="~/Content/Admin/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="~/Content/Admin/vendor/dataTablestables/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Admin/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="~/Content/Admin/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Content/Admin/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="~/Content/Admin/vendor/raphael/raphael.min.js"></script>
+    <script src="~/Content/Admin/vendor/morrisjs/morris.min.js"></script>
+    <script src="~/Content/Admin/data/morris-data.js"></script>
+    <!--add js ckfinder va ckeditor-->
+    <script src="~/Content/Admin/js/plugins/ckfinder/ckfinder.js"></script>
+    <script src="~/Content/Admin/js/plugins/ckeditor/ckeditor.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Content/Admin/dist/js/sb-admin-2.js"></script>
+
+</body>
+</html>
+

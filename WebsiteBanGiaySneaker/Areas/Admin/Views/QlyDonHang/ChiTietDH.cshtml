@@ -1,0 +1,94 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<WebsiteBanGiaySneaker.Models.CHITIETHD>
+
+@{
+    ViewBag.Title = "ChiTietDH";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<h2>CHI TIẾT</h2>
+<hr />
+@using (Html.BeginForm("ChiTietDH", "QlyDonHang", FormMethod.Get))
+{
+    <div class="col-lg-8">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" value="@ViewBag.TuKhoa" placeholder="Tìm kiếm theo mã đơn hàng" name="timkiem">
+            <span class="input-group-btn">
+                <button class="btn btn-success" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+}
+@if (TempData["thongbao"] != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <strong>@TempData["thongbao"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaDH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SANPHAM.TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DonGia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaMau)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SANPHAM.TenSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @string.Format("{0:0,0}", @item.DonGia) VNĐ
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size.Size1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MauSac.Color)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+    }
+
+</table>
+@*Tạo link liên kết các trang*@
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("ChiTietDH", new { @timkiem = @ViewBag.TuKhoa, page = page }))
+        @Html.ActionLink("Trở về", "DanhSachDonHang", null, new { @class = "btn btn-danger" })
+    </div>
+

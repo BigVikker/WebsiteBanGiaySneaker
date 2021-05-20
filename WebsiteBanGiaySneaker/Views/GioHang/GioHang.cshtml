@@ -1,0 +1,143 @@
+﻿@using WebsiteBanGiaySneaker.Models;
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<div class="ads-grid_shop">
+    <div class="shop_inner_inf">
+        <div class="privacy about">
+            @if (TempData["loisl"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>@TempData["loisl"]</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            <h3>Giỏ<span> Hàng</span></h3>
+            <div class="checkout-right">
+                <br /><hr />
+                @*<h4>Bạn đã chọn mua: <span> Sản phẩm</span></h4>*@
+                <table class="timetable_sub">
+                    <thead>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Ảnh</th>
+                            <th>Số lượng</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Màu sắc</th>
+                            <th>Size</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                            <th>cập nhật</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="rem1">
+                                <td class="invert" width="30">@item.masp</td>
+                                <td class="invert-image" width="300"><a href="@Url.Action("XemChiTiet","SanPham",new { @masp = item.masp})"><img src="@Url.Content("~/HinhAnh/HinhAnhSP/"+item.hinhanh)" alt=" " class="img-responsive"></a></td>
+                                @*Chỉnh sửa giỏ hàng gọi về action ChinhSuaGioHang  *@
+                                @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @masp = item.masp, @mamau = item.mamau, @masize = item.masize }))
+                                {
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <td class="invert">@Html.TextBox("txtSoLuong", item.soluong, new { @class = "form-control", @type = "number" })</td>
+                                    @Html.ValidationMessage("loisl", new { @class = "text-danger" })
+                                    <td class="invert">@item.tensp</td>
+                                    <td class="invert">@item.tenmau</td>
+                                    <td class="invert">@item.tensize</td>
+                                    <td class="invert">@string.Format("{0:0,0}", @item.dongia) VNĐ</td>
+                                    <td class="invert">@string.Format("{0:0,0}", @item.thanhtien) VNĐ</td>
+                                    <td class="invert">
+                                        <input type="submit" value="Cập nhật" class="btn btn-success" />
+                                        <br />
+                                        @*Xóa giỏ hàng gọi action XoaGioHang*@
+                                        @Html.ActionLink("Xóa", "XoaGioHang", new { @masp = item.masp, @mamau = item.mamau, @masize = item.masize }, new { @class = "btn btn-danger" })
+                                    </td>
+                                }
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            @*Chi tiết thành tiền*@
+            <div class="checkout-left">
+                <div class="col-md-4 checkout-left-basket">
+                    <h4>Chi tiết thành tiền</h4>
+                    <ul>
+                        @{int i = 0;}
+                        @foreach (var item in Model)
+                        {
+                            i++;
+                            <li>Sản phẩm @i <i> :</i> <span>@string.Format("{0:0,0}", item.thanhtien) VNĐ</span></li>
+                        }
+                        <li>Tổng tiền <i> :</i> <span>@string.Format("{0:0,0}", TempData["TongTien"]) VNĐ</span></li>
+                    </ul>
+                </div>
+                @*Nhập thông tin , địa chỉ nhận hàng thanh toán*@
+                @using (Html.BeginForm("DatHang", "GioHang"))
+                {
+                    if (Session["TaiKhoanKH"] == null || Session["TaiKhoanKH"].ToString() == "")
+                    {
+                        <div class="col-md-8 address_form">
+                            <br />
+                            <h3>Thông tin giao hàng</h3>
+                            <br />
+                            <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+                                <section class="creditly-wrapper wrapper">
+                                    <div class="information-wrapper">
+                                        <div class="first-row form-group">
+                                            <div class="controls">
+                                                <label class="control-label">Họ tên: </label>
+                                                <samp>@TempData["loiten"]</samp>
+                                                <input class="billing-address-name form-control" type="text" name="hoten" placeholder="Họ tên">
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">Email: </label>
+                                                <samp>@TempData["loiemail"]</samp>
+                                                <input class="billing-address-name form-control" type="text" name="emails" placeholder="Email">
+                                            </div>
+                                            <div class="card_number_grids">
+                                                <div class="card_number_grid_left">
+                                                    <div class="controls">
+                                                        <label class="control-label">Số điện thoại:</label>
+                                                        <samp>@TempData["loisdt"]</samp>
+                                                        <input class="form-control" type="number" name="sdt" placeholder="Số điện thoại">
+                                                    </div>
+                                                </div>
+                                                <div class="clear"> </div>
+                                            </div>
+                                            <div class="controls">
+                                                <label class="control-label">Địa chỉ giao: </label>
+                                                <samp>@TempData["loidiachi"]</samp>
+                                                <input class="form-control" type="text" name="diachigiao" placeholder="Địa chỉ giao">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                            <div class="checkout-right-basket">
+                                <input type="submit" value="Đặt hàng" class="btn btn-success" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="checkout-right-basket">
+                            <input type="submit" value="Đặt hàng" class="btn btn-success" />
+                        </div>
+                    }
+                }
+                <div class="clearfix"> </div>
+
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //top products -->
